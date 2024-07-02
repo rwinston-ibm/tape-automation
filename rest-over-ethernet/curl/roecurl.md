@@ -2,15 +2,15 @@
 
 
 <!-- Name of the example script -->
-# cURL Examples for REST over Ethernet
+# CURL Examples for REST over Ethernet
 
 <!-- Description of what the example script does -->
 ## Description
 
-A user can construct REST over Ethernet requests using the following cURL examples. 
-Requests must be made using an active session, created after successfully logging into the library.  
+A user can construct REST over Ethernet requests using curl. 
+Requests must be made using an active session. A session is created after successfully logging into the library.  
 When the user is done sending requests, a logout request can be sent to close the session.
-If no logout is sent, the session is automatically closed when it becomes inactive.
+If the user does not log out, the session is automatically closed when it becomes inactive.
 
 <!-- Description of how to use the script -->
 ## Usage
@@ -31,17 +31,6 @@ Arguments:
   * **-H** 	                            Adds header string to request header (used in POST|PUT)
   * **-d**	                            Sends data in POST, PATCH, DELETE request
   
-
-
-
-The **rest.py** script assumes the following:
-
-  1. Where indicated '-ip' address is the IP address of the TS4500 or Diamondback
-  2. Where indicated '-u' user is a valid login for the TS4500 or Diamondback
-  3. Where indicated '-p' user password for user
-  4. A user implementing this in production must edit the script to point the 'ca_file' variable to an actual certificate to utilize SSL
-
-
 <!-- Show product support information here -->
 ## Product Support
 
