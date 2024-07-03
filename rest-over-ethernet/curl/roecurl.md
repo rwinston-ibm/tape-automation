@@ -7,10 +7,11 @@
 <!-- Description of what the example script does -->
 ## Description
 
-A user can construct REST over Ethernet requests using curl. 
-Requests must be made using an active session. A session is created after successfully logging into the library.  
-When the user is done sending requests, a logout request can be sent to close the session.
-If the user does not log out, the session is automatically closed when it becomes inactive.
+A user can construct REST over Ethernet requests to the TS4500 or Diamondback Tape Library using curl commands.
+The first step is to log into the library to create an active session. 
+Subsequent REST over Ethernet requests to the library can then use the active session.
+Once the user is done using the REST over Ethernet API, a logout request can be sent to the library to close the session.
+If the user does not logout of the session, it will automatically be closed by the library once the session becomes inactive.
 
 <!-- Description of how to use the script -->
 ## Usage
@@ -34,7 +35,7 @@ Arguments:
 <!-- Show product support information here -->
 ## Product Support
 
-This script was designed for the TS4500 and Diamondback tape libraries, and tested on code levels starting with 1.10.x.x and 2.10.x.x respectively.
+The curl examples were designed for the TS4500 and Diamondback tape libraries, and tested on code levels starting with 1.10.x.x and 2.10.x.x respectively.
 
 <!-- Change history includes data and one line saying what changed -->
 ## Change History
