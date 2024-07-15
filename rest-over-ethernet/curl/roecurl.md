@@ -84,7 +84,7 @@ where `<`internalAddress`>` is taken from one of the cartridges returned by GET/
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/dataCartridges
 ```
 
-GET /v1/dataCartridges/<internalAddress>
+#### `GET /v1/dataCartridges/<internalAddress>`
 Retrieves information about the data cartridge with the specified internalAddress.
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/dataCartridges/<internalAddress>
 where <internalAddress> is taken from one of the cartridges returned by GET/v1/dataCartridges
