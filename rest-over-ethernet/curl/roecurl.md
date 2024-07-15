@@ -2,7 +2,7 @@
 
 
 <!-- Name of the example script -->
-# GUide for using CURL for REST over Ethernet
+# Guide for using CURL for REST over Ethernet
 
 <!-- Description of what the example script does -->
 ## Description
@@ -69,5 +69,5 @@ Retrieves information about the cleaning cartridge with the specified VOLSER num
 ```
 curl -k -b cookies.txt  -X GET https://9.11.45.116/web/api/v1/cleaningCartridges/<volser>
 ```
-where '<volser>' is taken from one of the cartridges returned by GET/v1/cleaningCartridges
+where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
