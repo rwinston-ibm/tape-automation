@@ -71,7 +71,7 @@ curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<
 where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
 
-#### GET /v1/cleaningCartridges/`<`internalAddress`>`
+#### GET /v1/cleaningCartridges/`<internalAddress>`
 ```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<internalAddress>
 ```
