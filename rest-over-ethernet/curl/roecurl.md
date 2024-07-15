@@ -85,26 +85,29 @@ curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/dataCartridges
 ```
 
 #### `GET /v1/dataCartridges/<internalAddress>`
-Retrieves information about the data cartridge with the specified internalAddress.
+```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/dataCartridges/<internalAddress>
-where <internalAddress> is taken from one of the cartridges returned by GET/v1/dataCartridges
+```
+where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/dataCartridges
 
-GET /v1/dataCartridges/<volser>
-Retrieves information about the data cartridge with the specified VOLSER number.
+#### GET /v1/dataCartridges/`<volser>`
+```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/dataCartridges/<volser>
-where <volser> is taken from one of the cartridges returned by GET/v1/dataCartridges
+```
+where `<volser>` is taken from one of the cartridges returned by GET/v1/dataCartridges
 
-Diagnostic cartridges
-Diagnostic cartridges are used periodically to test drive performance and troubleshoot problems.
+### Diagnostic cartridges
 
-GET /v1/diagnosticCartridges
-Retrieves information about all diagnostic cartridges in the tape library.
+#### GET /v1/diagnosticCartridges
+```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges
+```
 
-GET /v1/diagnosticCartridges/<volser>
-Retrieves information about the diagnostic cartridge with the specified VOLSER number.
+#### GET /v1/diagnosticCartridges/`<`volser`>`
+```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/<volser>
-where <volser> is taken from one of the cartridges returned by GET/v1/diagnosticCartridges
+```
+where `<`volser`>` is taken from one of the cartridges returned by GET/v1/diagnosticCartridges
 
 GET /v1/diagnosticCartridges/<internalAddress>
 Retrieves information about the diagnostic cartridge with the specified internalAddress.
