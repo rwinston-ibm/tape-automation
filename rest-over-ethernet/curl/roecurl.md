@@ -64,7 +64,6 @@ curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/cleaningCartridges
 ```
 
 #### GET /v1/cleaningCartridges/`<`volser`>`
-Retrieves information about the cleaning cartridge with the specified VOLSER number.
 
 ```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<volser>
@@ -72,17 +71,18 @@ curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<
 where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
 
-#### GET /v1/cleaningCartridges/<internalAddress>
-Retrieves information about the cleaning cartridge with the specified internalAddress.
+#### GET /v1/cleaningCartridges/`<`internalAddress`>`
+```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<internalAddress>
-where <internalAddress> is taken from one of the cartridges returned by GET/v1/cleaningCartridges
+```
+where `<`internalAddress`>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
-Data cartridges
-Data tape cartridges hold information that is written by a host securely and reliably. This information is read from and written to the cartridge by a tape drive.
+### Data cartridges
 
-GET /v1/dataCartridges
-Retrieves information about all host-accessible or unassigned data cartridges in the tape library. If a data cartridge is removed from the library or missing during an inventory scan, it does not appear in this list.
+#### GET /v1/dataCartridges
+```
 curl -k -b cookies.txt  -X GET https://192.0.2.0/web/api/v1/dataCartridges
+```
 
 GET /v1/dataCartridges/<internalAddress>
 Retrieves information about the data cartridge with the specified internalAddress.
