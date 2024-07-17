@@ -57,7 +57,6 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logout -b cookies.txt
 ```
-<hr>
 ### Cleaning cartridges
 
 #### GET/v1/cleaningCartridges
@@ -81,7 +80,6 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<i
 ```
 where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
-<hr>
 ### Data cartridges
 
 #### GET /v1/dataCartridges
@@ -350,7 +348,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/<location> {"use": `<"access" | "controlPath" | "verification">`}
+#### PUT /v1/drives/`<location>` 
 ```
 curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/<location> -b cookies.txt -d "{\"use\":\"access\"}"
 ```
@@ -362,7 +360,7 @@ curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/
 ```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/<sn> {"use": `<"access" | "controlPath" | "verification">`}
+#### PUT /v1/drives/`<sn>` 
 ```
 curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{"use":\"access"\"}"
 ```
@@ -374,7 +372,7 @@ curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### POST /v1/drives/<location>/reset {"mode": `<"normal" | "hard">`}
+#### POST /v1/drives/<location>/reset 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<location>/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
 ```
@@ -383,7 +381,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
 
-#### POST /v1/drives/<sn>/reset {"mode": `<"normal" | "hard">`}
+#### POST /v1/drives/<sn>/reset 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn>/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
 ```
@@ -392,7 +390,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/<sn> {"beacon": `<"enabled" | "disabled">`}
+#### PUT /v1/drives/<sn> 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{\"beacon\":\"disabled\"}"
 ```
@@ -449,7 +447,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateAccessor\", \"accessor\":\"accessor_Aa\"}"
 ```
 
-#### POST /v1/tasks {"type": "testDrive", "location": "drive_F`<f>`C`<c>`R`<r>`"}
+#### POST /v1/tasks testDrive
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"testDrive\", \"location\": \"drive_F1C5R3\"}"
 ```
@@ -473,7 +471,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessio
 where `<name>` is taken from one of the names returned from GET /v1/sessions
 
 
-#### POST /v1/authentication/sessions/`<name>`/disconnect {"reason": `<reason>`}
+#### POST /v1/authentication/sessions/`<name>`/disconnect
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/<name>/disconnect  -b cookies.txt -d "{\"reason\":\"`<reason>`\"}"
 ```
@@ -493,13 +491,13 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authenticatiion/userA
 ```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts
 
-#### POST /v1/authentication/userAccounts{"name": `<name>`, "role": `<role>`, "email": `<email>`, "password": `<password>`, "expirePassword": `<"yes"|"no">`}
+#### POST /v1/authentication/userAccounts
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -b cookies.txt -d "{\"name\":\"<name>\", \"role\":\"<role>\", \"email\":\"<email>\", \"password\":\"<password>\", \"expirePassword\": <"yes"|"no">}"
 ```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts and either "yes" or "no" must be specified for expirePassword parameter.
 
-#### PUT /v1/authentication/userAccounts/`<name>` {"role": `<role>`, "email": `<email>`}
+#### PUT /v1/authentication/userAccounts/`<name>` 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/<name> i -b cookies.txt -d "{\"role\":\"<role>\", \"email\":\"<email>\"}"
 ```
@@ -511,7 +509,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts
 
-#### POST /v1/authentication/userAccounts/<name>/setPassword{"password": `<new password or temporary password>`, "expirePassword": `<"yes"|"no">`}
+#### POST /v1/authentication/userAccounts/`<name>`/setPassword
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/<name>/setPassword -b cookies.txt -d "{\"password\":\"<new password or temporary password>\", \"expirePassword\": <"yes"|"no">}"
 ```
