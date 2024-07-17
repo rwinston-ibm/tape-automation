@@ -60,14 +60,14 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ### Cleaning Cartridges
 
 #### Get Cleaning Cartridges
-##### Syntax
+##### API
 GET/v1/cleaningCartridges
 ##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges
 ```
 #### Get Cleaning Cartridge by Volser
-##### Syntax
+##### API
 GET /v1/cleaningCartridges/`<volser>`
 
 ##### Example
@@ -78,7 +78,7 @@ where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaning
 
 
 #### Get Cleaning Cartridge by Internal Address
-##### Syntax
+##### API
 
 GET /v1/cleaningCartridges/`<internalAddress>`
 
