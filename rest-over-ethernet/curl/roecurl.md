@@ -66,20 +66,20 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges
 ```
 #### GET /v1/cleaningCartridges/`<volser>`
 
-##### Example
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<volser>
-```
 where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
+##### Example
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/CLNU87L9
+```
 
 #### GET /v1/cleaningCartridges/`<internalAddress>`
+where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
 ##### Example
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<internalAddress>
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/FF0400
 ```
-where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
 ### Data cartridges
 
@@ -91,17 +91,18 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges
 
 ###### GET /v1/dataCartridges/`<internalAddress>`
 
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/<internalAddress>
-```
 where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/dataCartridges
+
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/FF0412
+```
 
 ##### GET /v1/dataCartridges/`<volser>`
 
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/<volser>
-```
 where `<volser>` is taken from one of the cartridges returned by GET/v1/dataCartridges
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/IBM011LT
+```
 
 ### Diagnostic cartridges
 
@@ -112,18 +113,17 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges
 ```
 
 ##### GET /v1/diagnosticCartridges/`<volser>`
-
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/<volser>
-```
 where `<volser>` is taken from one of the cartridges returned by GET/v1/diagnosticCartridges
 
-##### GET /v1/diagnosticCartridges/`<internalAddress>`
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/IBM011LT
+```
 
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/<internalAddress>
-```
+##### GET /v1/diagnosticCartridges/`<internalAddress>`
 where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/diagnosticCartridges
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/FF0412
+```
  
 ### Ethernet ports
 
@@ -140,16 +140,16 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events
 ```
 
 ##### GET /v1/events/`<ID>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events/<ID>
-```
 where `<ID>` is taken from one of the events returned by GET/v1/events
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events/876
+```
 
 ##### GET /v1/events/`<ID>`/fixProcedure
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events/<ID>/fixProcedure
-```
 where `<ID>` is taken from one of the events returned by GET/v1/events
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events/1038/fixProcedure
+```
 
 ### Fibre Channel ports
 
@@ -159,10 +159,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/fcPorts
 ```
 
 ##### GET /v1/fcports/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/fcports/<location>
-```
 where `<location>` is taken from one of the fcports returned by GET/v1/fcports
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/fcports/fcPort_F1C1R4P0
+```
 
  
 ### Frames
@@ -173,10 +173,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/frames
 ```
 
 ##### GET /v1/frames/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/frames/<location>
-```
 where `<location>` is taken from one of the fcports returned by GET/v1/frames
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/frames/frame_F1
+```
  
 ### I/O stations
 
@@ -186,10 +186,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ioStations
 ```
 
 ##### GET /v1/iostations/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/iostations/<location>
-```
 where `<location>` is taken from one of the fcports returned by GET/v1/iostations
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/iostations/ioStation__C3
+```
 
  
 ### Library
@@ -226,16 +226,16 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logs
 ```
 
 ##### GET /v1/logs/`<filename>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logs/<filename>
-```
 where `<filename>` is the name of one of the files returned by GET /v1/logs
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logs/TS4500_LOG_FA004_20240507102856.zip
+```
 
 ##### GET /v1/logs/`<filename>`/export
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logs/<filename>/export
-```
 where `<filename>` is the name of one of the files returned by GET /v1/logs
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logs/TS4500_LOG_FA004_20240507102856.zip/export
+```
 
 ### Node cards
 
@@ -245,16 +245,16 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/nodeCards
 ```
 
 ##### GET /v1/nodeCards/`<ID>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/nodeCards/<ID>
-```
 where `<ID>` is the name of one of the files returned by GET /v1/nodeCards
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/nodeCards/65
+```
 
 ##### POST /v1/nodeCards/`<ID>`/reset
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/nodeCards/<ID>/reset -b cookies.txt
-```
 where `<ID>` is the name of one of the files returned by GET /v1/nodeCards
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/nodeCards/65/reset -b cookies.txt
+```
 
 ### Power supplies
 
@@ -264,10 +264,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/powerSupplies
 ```
 
 ##### GET /v1/powerSupplies/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/powerSupplies/<location>
-```
 where `<location>` is taken from one of the power supplies returned by GET /v1/powerSupplies
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/powerSupplies/powerSupply_F1PSa
+```
 
  
 ### Logical libraries
@@ -278,16 +278,16 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries
 ```
 
 ##### GET /v1/logicalLibraries/`<name>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/<name>
-```
 where `<name>` is taken from one of the logical libraries returned from GET /v1/logicalLibraries
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/BackupLib
+```
 
 ##### GET /v1/logicalLibraries/`<name>`/voslerRanges
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/<name>/voslerRanges
-```
 where `<name>` is taken from one of the logical libraries returned from GET /v1/logicalLibraries
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/LogicalLibrary1/voslerRanges
+```
 
 
 ### Reports
@@ -324,10 +324,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/slots
 ```
 
 ##### GET /v1/slots/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/slots/<location>
-```
 where `<location>` is taken from one of the slots returned by GET /v1/slots
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/slots/slot_F1C4R8
+```
  
 ### Tape drive
 
@@ -337,79 +337,79 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives
 ```
 
 ##### GET /v1/drives/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/<location>
-```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
+```
 
 ##### GET /v1/drives/`<sn>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/<sn>
-```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/607BBFFFF8
+```
 
 ##### POST /v1/drives/`<location>`/clean
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/<location>
-```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
+```
 
 ##### POST /v1/drives/`<sn>`/clean
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn>/clean -b cookies.txt
-```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/607BBFFFF8/clean -b cookies.txt
+```
 
 #### PUT /v1/drives/`<location>` {"use": <"access" | "controlPath" | "verification">}
-```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/<location> -b cookies.txt -d "{\"use\":\"access\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/<location> -b cookies.txt -d "{\"use\":\"controlPath\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/<location> -b cookies.txt -d "{\"use\":\"verification\"}"
-```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"access\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"controlPath\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"verification\"}"
+```
 
 #### PUT /v1/drives/`<sn>` {"use": <"access" | "controlPath" | "verification">}
-```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{"use":\"access"\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{"use":\"controlPath\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{"use":\"verification\"}"
-```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"access"\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4-b cookies.txt -d "{"use":\"controlPath\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"verification\"}"
+```
 
 ##### POST /v1/drives/<location>/reset {"mode": <"normal" | "hard">} 
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<location>/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<location>/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
-```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
+```
 
 ##### POST /v1/drives/<sn>/reset {"mode": <"normal" | "hard">}
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn>/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn>/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
-```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
+```
 
 ##### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{\"beacon\":\"disabled\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{\"beacon\":\"enabled\"}"
-```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"disabled\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"enabled\"}"
+```
  
 ### Tasks
 
@@ -419,10 +419,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/tasks
 ```
 
 ##### GET /v1/tasks/`<ID>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/tasks/<ID>
-```
 where `<ID>` is the name of one of the tasks returned by GET /v1/tasks
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/tasks/82
+```
 
 ##### POST /v1/tasks {"type": "inventoryTier0and1", "location": <"library" | "frame_F`<f>`">}
 ```
@@ -489,17 +489,17 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessio
 ```
 
 ##### GET /v1/authentication/sessions/`<name>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessions/<name>
-```
 where `<name>` is taken from one of the names returned from GET /v1/sessions
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessions/admin
+```
 
 
 ##### POST /v1/authentication/sessions/`<name>`/disconnect
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/<name>/disconnect  -b cookies.txt -d "{\"reason\":\"`<reason>`\"}"
-```
 where `<name>` is taken from one of the names returned from GET /v1/sessions and `<reason>` is text explaining why the user is being disconnected.
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/anotherusername/disconnect  -b cookies.txt -d "{\"reason\":\"`Need to use the library.`\"}"
+```
 
  
 ### Local user accounts
@@ -510,34 +510,34 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/userAc
 ```
 
 ##### GET /v1/authentication/userAccounts/`<name>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authenticatiion/userAccounts/<name>
-```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authenticatiion/userAccounts/myusername
+```
 
 ##### POST /v1/authentication/userAccounts
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -b cookies.txt -d "{\"name\":\"<name>\", \"role\":\"<role>\", \"email\":\"<email>\", \"password\":\"<password>\", \"expirePassword\": <"yes"|"no">}"
-```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts and either "yes" or "no" must be specified for expirePassword parameter.
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -b cookies.txt -d "{\"name\":\"<name>\", \"role\":\"Administrator\", \"email\":\"username@example.com\", \"password\":\"mypassword\", \"expirePassword\": "no"}"
+```
 
 ##### PUT /v1/authentication/userAccounts/`<name>` 
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/<name> i -b cookies.txt -d "{\"role\":\"<role>\", \"email\":\"<email>\"}"
-```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/myUsername i -b cookies.txt -d "{\"role\":\"Administrator\", \"email\":\"myusername@example.com\"}"
+```
 
 ##### POST /v1/authentication/userAccounts/`<name>`/unlock
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/<name>/unlock -b cookies.txt -d
-```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/myusername/unlock -b cookies.txt -d
+```
 
 ##### POST /v1/authentication/userAccounts/`<name>`/setPassword
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/<name>/setPassword -b cookies.txt -d "{\"password\":\"<new password or temporary password>\", \"expirePassword\": <"yes"|"no">}"
-```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts and either "yes" or "no" must be specified for expirePassword parameter.
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/admin/setPassword -b cookies.txt -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
 
 ### Roles
 
@@ -547,10 +547,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/roles
 ```
 
 ##### GET /v1/authentication/roles/`<name>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/roles/<name>
-```
 where `<name>` is taken from one of the names returned from GET /v1/roles
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/roles/Administrator
+```
  
 ### Syslog notifications
 
@@ -560,10 +560,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/s
 ```
 
 ##### GET /v1/notification/syslog/servers/`<ipAddress>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/servers/<ipAddress>
-```
 where `<ipAddress>` is taken from one of the servers returned by GET /v1/notification/syslog/servers
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.11
+```
 
  
 ### GUI settings
