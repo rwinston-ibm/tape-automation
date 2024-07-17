@@ -348,7 +348,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/`<location>` 
+#### PUT /v1/drives/`<location>` {"use": <"access" | "controlPath" | "verification">}
 ```
 curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/<location> -b cookies.txt -d "{\"use\":\"access\"}"
 ```
@@ -360,7 +360,7 @@ curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/
 ```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/`<sn>` 
+#### PUT /v1/drives/`<sn>` {"use": <"access" | "controlPath" | "verification">}
 ```
 curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{"use":\"access"\"}"
 ```
@@ -372,7 +372,7 @@ curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### POST /v1/drives/<location>/reset 
+#### POST /v1/drives/<location>/reset {"mode": <"normal" | "hard">} 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<location>/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
 ```
@@ -381,7 +381,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<location>` is taken from one of the drives returned by GET /v1/drives
 
-#### POST /v1/drives/<sn>/reset 
+#### POST /v1/drives/<sn>/reset {"mode": <"normal" | "hard">}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn>/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
 ```
@@ -390,7 +390,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/<sn> 
+#### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{\"beacon\":\"disabled\"}"
 ```
@@ -447,7 +447,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateAccessor\", \"accessor\":\"accessor_Aa\"}"
 ```
 
-#### POST /v1/tasks testDrive
+#### POST /v1/tasks testDrive {"type": "testDrive", "location": "drive_F`<f>`C`<c>`R`<r>`"}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"testDrive\", \"location\": \"drive_F1C5R3\"}"
 ```
