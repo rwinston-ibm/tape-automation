@@ -46,18 +46,18 @@ The curl examples were designed for the TS4500 and Diamondback tape libraries, a
 
 ## CURL Examples
 
-### LOGIN
+### Login
 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/login -c cookies.txt -d "{\"user\":\"myusername\",\"password\":\"mypassword\"}" -v
 ```
 
-### LOGOUT
+### Logout
 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logout -b cookies.txt
 ```
-
+<hr>
 ### Cleaning cartridges
 
 #### GET/v1/cleaningCartridges
@@ -81,6 +81,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<i
 ```
 where `<internalAddress>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
+<hr>
 ### Data cartridges
 
 #### GET /v1/dataCartridges
