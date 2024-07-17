@@ -297,6 +297,17 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
 ```
 
+#### Save Config
+##### GET /v1/library/saveConfig 
+
+Example
+```
+curl -k -b cookie.txt -X GET https://9.11.45.78/web/api/v1/library/saveConfig --output dbfile.dbz
+```
+
+Restore Config
+curl -k -v -b cookie.txt -H "Content-Type: multipart/form-data" POST https://9.11.45.78/web/api/v1/library/restoreConfig -F 'filename=@dbfile.dbz; type=application/octet-stream'
+
 ### Robotic accessors
 
 #### GET /v1/accessors
@@ -437,7 +448,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateLibrary\", \"accessor\":\"accessor_Aa\"}"
 ```
 
-#### POST /v1/tasks {"type": "calibrateFrame", “location": "frame_F`<f>`", "accessor": “accessor_A`<a|b>`"}
+#### POST /v1/tasks {"type": "calibrateFrame", “location": "frame_F`<f>`", "accessor": "accessor_A`<a|b>`"}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateFrame\", \"location\":\"frame_F1\", \"accessor\": \"accessor_Aa\"}"
 ```
@@ -450,6 +461,18 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 #### POST /v1/tasks testDrive {"type": "testDrive", "location": "drive_F`<f>`C`<c>`R`<r>`"}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"testDrive\", \"location\": \"drive_F1C5R3\"}"
+```
+
+#### POST /v1/tasks testDrive {"type": "updateLibraryFirmware"}
+Content type must be multipart form-data to send both the json data and file contents in a single http request. 
+```
+curl -k -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/tasks -b cookie.txt -F 'filename=@TS4500_11100-05G.afwz; type=application/octet-stream' -F '{"type": "updateLibraryFirmware"};type= application/json'
+```
+
+#### POST /v1/tasks testDrive {"type": "updateDriveFirmware", "drive_F`<f>`C`<c>`R`<r>`"}
+Content type must be multipart form-data to send both the json data and file contents in a single http request. 
+```
+curl -k -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/tasks -b cookie.txt -F 'filename=@D3I4_A0B.fcp_fj_D.fmrz; type=application/octet-stream' -F '{"type": "updateDriveFirmware", "location":"drive_F1C4R4"};type= application/json'
 ```
 
 ### Authentication
