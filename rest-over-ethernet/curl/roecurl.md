@@ -59,22 +59,30 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 ### Cleaning Cartridges
 
-###### GET/v1/cleaningCartridges
-
+#### Get Cleaning Cartridges
+##### Syntax
+GET/v1/cleaningCartridges
+##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges
 ```
+#### Get Cleaning Cartridge by Volser
+##### Syntax
+GET /v1/cleaningCartridges/`<volser>`
 
-###### GET /v1/cleaningCartridges/`<volser>`
-
+##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<volser>
 ```
 where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
 
-###### GET /v1/cleaningCartridges/`<internalAddress>`
+#### Get Cleaning Cartridge by Internal Address
+##### Syntax
 
+GET /v1/cleaningCartridges/`<internalAddress>`
+
+##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<internalAddress>
 ```
@@ -144,7 +152,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events/<ID>
 ```
 where `<ID>` is taken from one of the events returned by GET/v1/events
 
-##### GET /v1/events/<ID>/fixProcedure
+##### GET /v1/events/`<ID>`/fixProcedure
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/events/<ID>/fixProcedure
 ```
@@ -401,7 +409,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<sn>` is taken from one of the drives returned by GET /v1/drives
 
-#### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
+##### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/<sn> -b cookies.txt -d "{\"beacon\":\"disabled\"}"
 ```
@@ -438,7 +446,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"startDriveService\", \"location\":\"drive_F1C3R5\"}"
 ```
 
-####  POST /v1/tasks {"type": "completeDriveService", "location": "drive_F`<f>`C`<c>`R`<r>`"}
+##### POST /v1/tasks {"type": "completeDriveService", "location": "drive_F`<f>`C`<c>`R`<r>`"}
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"completetDriveService\", \"location\":\"drive_F1C3R5\"}"
 ```
@@ -520,7 +528,7 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 where `<name>` is taken from one of the names returned from GET /v1/userAccounts and either "yes" or "no" must be specified for expirePassword parameter.
 
-#### PUT /v1/authentication/userAccounts/`<name>` 
+##### PUT /v1/authentication/userAccounts/`<name>` 
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/<name> i -b cookies.txt -d "{\"role\":\"<role>\", \"email\":\"<email>\"}"
 ```
