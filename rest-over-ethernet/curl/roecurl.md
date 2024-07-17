@@ -57,15 +57,17 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logout -b cookies.txt
 ```
-### Cleaning cartridges
+### Cleaning Cartridges
 
-#### GET/v1/cleaningCartridges
+#### Get All Cleaning Cartridges
+##### GET/v1/cleaningCartridges
 
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges
 ```
 
-#### GET /v1/cleaningCartridges/`<volser>`
+#### Get Cleaning Cartridge by Volser
+##### GET /v1/cleaningCartridges/`<volser>`
 
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<volser>
@@ -73,7 +75,8 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<v
 where `<volser>` is taken from one of the cartridges returned by GET/v1/cleaningCartridges
 
 
-#### GET /v1/cleaningCartridges/`<internalAddress>`
+#### Get Cleaning Cartridge by Internal Address
+##### GET /v1/cleaningCartridges/`<internalAddress>`
 
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/<internalAddress>
@@ -282,31 +285,34 @@ where `<name>` is taken from one of the logical libraries returned from GET /v1/
 
 ### Reports
 
-#### GET /v1/reports/library
+#### Get Reports
+
+##### GET /v1/reports/library
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
 ```
 
-#### GET /v1/reports/drives
+##### GET /v1/reports/drives
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives
 ```
 
-#### GET /v1/reports/accessors
+##### GET /v1/reports/accessors
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
 ```
 
-#### Save Config
+#### Save Configuration
 ##### GET /v1/library/saveConfig 
-
-Example
 ```
-curl -k -b cookie.txt -X GET https://9.11.45.78/web/api/v1/library/saveConfig --output dbfile.dbz
+curl -k -b cookie.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig --output dbfile.dbz
 ```
 
-Restore Config
-curl -k -v -b cookie.txt -H "Content-Type: multipart/form-data" POST https://9.11.45.78/web/api/v1/library/restoreConfig -F 'filename=@dbfile.dbz; type=application/octet-stream'
+#### Restore Configuration
+##### POST /v1/library/restoreConfig  
+```
+curl -k -v -b cookie.txt -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/library/restoreConfig -F 'filename=@dbfile.dbz; type=application/octet-stream'
+```
 
 ### Robotic accessors
 
