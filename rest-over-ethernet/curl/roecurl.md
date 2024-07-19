@@ -290,9 +290,11 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts/ethernetPort_F1Pa
 ```
 
-<! ##### PUT /v1/ethernetPorts/{location} {"ipv4Address": `<IPv4 address>`, "ipv4Subnet": `<IPv4 subnet mask>`, "ipv4Gateway": `<IPv4 gatway address>`, 
-"ipv4Assignment": `<"static"|"dynamic">`, "ipv4Primary": `<IPv4 address>`, "ipv4Secondary": `<IPv4 address>`}
--->
+##### PUT /v1/ethernetPorts/{location} {"ipv4Address": `<IPv4 address>`, "ipv4Subnet": `<IPv4 subnet mask>`, "ipv4Gateway": `<IPv4 gatway address>`, "ipv4Assignment": `<"static"|"dynamic">`, "ipv4Primary": `<IPv4 address>`, "ipv4Secondary": `<IPv4 address>`}
+
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/ethernetPorts/ethernetPort_F1Pa -d "{"ipv4Assignment": "static", ipv4Address": "192.0.2.2", "ipv4Subnet": "255.255.252.0", "ipv4Gateway": "192.0.2.24"}"
+```
 
 ### Events
 
@@ -372,15 +374,27 @@ curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library -d "{\"time\":\"2024-10-20T22:46:00\"}"
 ```
-PATCH /v1/library {"ntpMode": <"enabled|"disabled">, "primaryNtpAddress": <address>, "secondaryNtpAddress": <address>}
 
-PATCH/v1/library {"timezone":<time zone>}
-Manually sets the time zone of the library.
+##### PATCH /v1/library {"ntpMode": <"enabled|"disabled">, "primaryNtpAddress": <address>, "secondaryNtpAddress": <address>}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{"ntpMode": "enabled">, "primaryNtpAddress": "192.0.2.1", "secondaryNtpAddress": "192.0.2.1"}"
+```
 
-PATCH /v1/library {"capacityUtilThresh": <value>}
-Modify the licensed capacity warning threshold.
+##### PATCH /v1/library {"timezone":<time zone>}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{"timezone":"America/Phoenix"}"
+```
 
-PATCH /v1/library {"location":<install location description>, "address": <install address>, "city": <install city>, "state": <install state>, "country": <install country>, "contact": <library admin>, "telephone": <library admin phone>, "secondaryTelephone": <library admin backup phone>}
+##### PATCH /v1/library {"capacityUtilThresh": <value>}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{"capacityUtilThresh": 90.9}"
+```
+
+##### PATCH /v1/library {"location":<install location description>, "address": <install address>, "city": <install city>, "state": <install state>, "country": <install country>, "contact": <library admin>, "telephone": <library admin phone>, "secondaryTelephone": <library admin backup phone>}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"location\": \"Storage Lab\", \"address\": \"0 Main St\", \"city\": \"Phoenix\", \"state\": \"AZ\", \"country\": \"US\", \"contact\": \"J Doe\"}"
+```
+
 ###### PUT /v1/library/saveConfig 
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig --output dbfile.dbz
@@ -677,49 +691,47 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/s
 
 ##### POST /v1/notification/syslog/servers {"address": <address>, "port": <port>, "subscribed": ["error"|"warning"|"information", ...]}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d " {"address": <address>, "port": <port>, "subscribed": ["error"|"warning"|"information", ...]}"
 ```
 
-GET /v1/notification/syslog/servers
-Returns the list of Syslog servers that are registered with the library to receive Syslog notifications and their current settings.
+##### GET /v1/notification/syslog/servers
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
-```
-
-GET /v1/notification/syslog/servers/{ipAddress}
-Returns the list of Syslog servers for a specified IP address or host name.
-```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{ipAddress} -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/servers
 ```
 
-PATCH /v1/notification/syslog/servers/{address} {"address": <address>, "port": <port>}Modifies the address or port of the syslog server. This is used if there are network changes that cause these addresses to change or to fix incorrect configurations.
+##### GET /v1/notification/syslog/servers/{ipAddress}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{address} -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
-```
-
-PATCH /v1/notification/syslog/servers/{address} {"subscribed": ["information" | "warning" | "error", ...]}Modifies the severity of notifications the syslog server is subscribed to receive. All notifications of the selected verities will be returned.
-```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{address} -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.11
 ```
 
-Work items
-Work items represent cartridge move requests within the library. They are stored in the library in a work item queue that the library uses to prioritize moves in the most efficient manner.
+##### PUT /v1/notification/syslog/servers/{address} {"address": <address>, "port": <port>}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{address} -d "{"address": <address>, "port": <port>}"
+```
 
-POST /v1/workItems {"type": "moveToSlot", "cartridge": <volser>,"sourceInternalAddress": <internalAddress>,"destinationLocation": <location>}
-Moves a cartridge to a slot chosen by the library.
+##### PUT /v1/notification/syslog/servers/{address} {"subscribed": ["information" | "warning" | "error", ...]}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{address} -d "{"subscribed": ["information" | "warning" | "error", ...]}"
+```
+
+### Work items
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/workItems
 ```
-
-POST /v1/workItems [{"type": "moveToDrive", "cartridge": <volser>,"sourceInternalAddress": <internalAddress>, "destinationLocation": <location>, "destinationSN": < serialNumber >}]
-Moves a cartridge to the specified drive.
+##### POST /v1/workItems {"type": "moveToSlot", "cartridge": <volser>,"sourceInternalAddress": <internalAddress>,"destinationLocation": <location>}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"type\": \"moveToSlot\", \"cartridge\": \"FF0006L8\", \"destinationLocation\": \"slot_F1C2R5T1\"}"
 ```
 
-POST /v1/workItems [{"type": "moveToIOStation", "cartridge": <volser>, "sourceInternalAddress": <internalAddress>, "destinationLocation": <location>}]
+##### POST /v1/workItems [{"type": "moveToDrive", "cartridge": <volser>,"sourceInternalAddress": <internalAddress>, "destinationLocation": <location>, "destinationSN": < serialNumber >}]
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"type\":\"moveToDrive\", \"cartridge\":\"FF0002L8\", \"destinationLocation\": \"drive_F1C2R2\"}"
+
+```
+
+##### POST /v1/workItems [{"type": "moveToIOStation", "cartridge": <volser>, "sourceInternalAddress": <internalAddress>, "destinationLocation": <location>}]
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"type\":\"moveToIOStation\", \"sourceInternalAddress\":\"010404\", \"destinationLocation\": \"ioSlot_C3R2T1\"}"
 ```
 
 
