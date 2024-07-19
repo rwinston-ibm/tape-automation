@@ -7,11 +7,10 @@
 <!-- Description of what the example script does -->
 ## Description
 
-A user can construct REST over Ethernet requests to the TS4500 or Diamondback Tape Library using curl commands.
-The first step is to log into the library to create an active session. 
-Subsequent REST over Ethernet requests to the library can then use the active session.
-Once the user is done using the REST over Ethernet API, a logout request can be sent to the library to close the session.
-If the user does not logout of the session, it will automatically be closed by the library once the session becomes inactive.
+Curl can be used to send REST over Ethernet (RoE) requests to the TS4500 or Diamondback Tape Library. 
+Once a user/script successfully logs into the library, the active session may be used to send further RoE requests to the library.
+To close the session a logout request can be sent to the library.
+Sessions left open will be closed, automatically, by the library once the session becomes inactive.
 
 <!-- Description of how to use the script -->
 ## Usage
@@ -40,7 +39,7 @@ The curl examples were designed for the TS4500 and Diamondback tape libraries, a
 <!-- Change history includes data and one line saying what changed -->
 ## Change History
 
-  * July 2, 2024 - **Roberta Winston** - Initial release.
+  * July 19, 2024 - **Roberta Winston** - Initial release.
 
 <hr>
 
@@ -57,24 +56,42 @@ curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1
 ```
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logout -b cookies.txt
 ```
+
+
+### Accessors (TS4500 only)
+
+##### GET /v1/accessors
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/accessors
+```
+
+##### GET /v1/accessors/`<location>`
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/accessors/accessor_Aa
+```
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/accessors/accessor_Ab
+```
+##### PUT /v1/accessors/`<location>` {"velocityScalingXY": <value>, "velocityScalingPivot": <value>}
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/accessors/accessor_Aa -d "{\"velocityScalingXY\": 60, \"velocityScalingPivot\": 80}
+```
+
 ### Cleaning Cartridges
 
 #### GET/v1/cleaningCartridges
-##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges
 ```
 #### GET /v1/cleaningCartridges/`<volser>`
 
 
-##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/CLNU87L9
 ```
 
 #### GET /v1/cleaningCartridges/`<internalAddress>`
 
-##### Example
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/cleaningCartridges/FF0400
 ```
@@ -119,11 +136,89 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/FF0412
 ```
  
+### Drives
+
+##### GET /v1/drives
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives
+```
+
+##### GET /v1/drives/`<location>`
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
+```
+
+##### GET /v1/drives/`<sn>`
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/607BBFFFF8
+```
+
+##### POST /v1/drives/`<location>`/clean
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
+```
+
+##### POST /v1/drives/`<sn>`/clean
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/607BBFFFF8/clean -b cookies.txt
+```
+
+##### PUT /v1/drives/`<location>` {"use": <"access" | "controlPath" | "verification">}
+```
+curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"access\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"controlPath\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"verification\"}"
+```
+
+##### PUT /v1/drives/`<sn>` {"use": <"access" | "controlPath" | "verification">}
+```
+curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"access"\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4-b cookies.txt -d "{"use":\"controlPath\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"verification\"}"
+```
+
+##### POST /v1/drives/<location>/reset {"mode": <"normal" | "hard">} 
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
+```
+
+##### POST /v1/drives/<sn>/reset {"mode": <"normal" | "hard">}
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
+```
+
+##### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"disabled\"}"
+```
+```
+curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"enabled\"}"
+```
+
 ### Ethernet ports
 
 ##### GET /v1/ethernetPorts
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts
+```
+
+##### GET /v1/ethernetPorts/`<location>`
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts/ethernetPort_F1Pa
 ```
 
 ### Events
@@ -193,11 +288,12 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library
 curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library/reset -b cookies.txt
 ```
 
-##### GET /v1/library/saveConfig
+##### PUT /v1/library
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library -d "{\"time\":\"2024-10-20T22:46:00\"}"
 ```
-###### GET /v1/library/saveConfig 
+
+###### PUT /v1/library/saveConfig 
 ```
 curl -k -b cookie.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig --output dbfile.dbz
 ```
@@ -274,9 +370,14 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/Logi
 
 ### Reports
 
-###### GET /v1/reports/library
+###### GET /v1/reports/accessors
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
+```
+
+###### GET /v1/reports/accessors?after=<YYYY-MM-DDThh:mm:ss>&before=<YYYY-MM-DDThh:mm:ss
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
 ```
 
 ###### GET /v1/reports/drives
@@ -284,19 +385,21 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives
 ```
 
-###### GET /v1/reports/accessors
+###### GET /v1/reports/drives?after=<YYYY-MM-DDThh:mm:ss>&before=<YYYY-MM-DDThh:mm:ss>
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives
 ```
 
-
-
-### Robotic accessors
-
-##### GET /v1/accessors
+###### GET /v1/reports/library
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/accessors
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
 ```
+
+###### GET /v1/reports/library?after=<YYYY-MM-DDThh:mm:ss>&before=<YYYY-MM-DDThh:mm:ss>
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
+```
+
  
 ### Slots and Tiers
 
@@ -310,78 +413,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/slots
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/slots/slot_F1C4R8
 ```
  
-### Tape drive
 
-##### GET /v1/drives
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives
-```
-
-##### GET /v1/drives/`<location>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
-```
-
-##### GET /v1/drives/`<sn>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/607BBFFFF8
-```
-
-##### POST /v1/drives/`<location>`/clean
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
-```
-
-##### POST /v1/drives/`<sn>`/clean
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/607BBFFFF8/clean -b cookies.txt
-```
-
-#### PUT /v1/drives/`<location>` {"use": <"access" | "controlPath" | "verification">}
-```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"access\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"controlPath\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"verification\"}"
-```
-
-#### PUT /v1/drives/`<sn>` {"use": <"access" | "controlPath" | "verification">}
-```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"access"\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4-b cookies.txt -d "{"use":\"controlPath\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"verification\"}"
-```
-
-##### POST /v1/drives/<location>/reset {"mode": <"normal" | "hard">} 
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
-```
-
-##### POST /v1/drives/<sn>/reset {"mode": <"normal" | "hard">}
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
-```
-
-##### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"disabled\"}"
-```
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"enabled\"}"
-```
  
 ### Tasks
 
