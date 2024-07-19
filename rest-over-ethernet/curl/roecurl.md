@@ -48,15 +48,54 @@ The curl examples were designed for the TS4500 and Diamondback tape libraries, a
 ### Login
 
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/login -c cookies.txt -d "{\"user\":\"myusername\",\"password\":\"mypassword\"}" -v
+curl -k -c cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/login -d "{\"user\":\"myusername\",\"password\":\"mypassword\"}" -v
 ```
 
 ### Logout
 
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logout -b cookies.txt
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logout
 ```
 
+### Authentication
+
+##### GET /v1/authentication/passwordPolicy
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/passwordPolicy
+```
+
+##### GET /v1/authentication/sessions
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessions
+```
+
+##### GET /v1/authentication/sessions/`<name>`
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessions/admin
+```
+
+##### GET /v1/authentication/sessionPolicy
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessionPolicy
+```
+
+##### POST /v1/authentication/passwordPolicy/factoryReset
+```
+curl -k -b cookies.txt -X POST https://192.0.2.0/web/api/v1/authentication/passwordPolicy/factoryReset
+```
+
+##### POST /v1/authentication/sessions/`<name>`/disconnect
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/anotherusername/disconnect -d "{\"reason\":\"`Need to use the library.`\"}"
+```
+
+##### PUT /v1/authentication/sessionPolicy {"autoLogout": <minutes|null>, "autoIMCLogin": <enabled"|"disabled">}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/authentication/sessionPolicy -d "{\"autoLogout\": 1}"
+```
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/authentication/sessionPolicy -d "{\"autoIMCLogin\": \"disabled\"}"
+```
 
 ### Accessors (TS4500 only)
 
@@ -117,6 +156,21 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/FF0412
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/IBM011LT
 ```
 
+##### GET /v1/dataCartridges/lifetimeMetrics
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/lifetimeMetrics
+```
+
+##### GET /v1/dataCartridges/<internalAddress>/lifetimeMetrics
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/FF0412/lifetimeMetrics
+```
+
+##### GET /v1/dataCartridges/<volser>/lifetimeMetrics
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/dataCartridges/IBM%2011LT/lifetimeMetrics
+```
+
 ### Diagnostic cartridges
 
 ##### GET /v1/diagnosticCartridges
@@ -135,7 +189,22 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/FF0412
 ```
- 
+
+##### GET /v1/diagnosticCartridges/lifetimeMetrics
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/FF0412
+```
+
+##### GET /v1/diagnosticCartridges/<internalAddress>/lifetimeMetrics
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/FF0412
+```
+
+##### GET /v1/diagnosticCartridges/<volser>/lifetimeMetrics
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/diagnosticCartridges/FF0412
+```
+
 ### Drives
 
 ##### GET /v1/drives
@@ -160,53 +229,53 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/drives/drive_F1C3R2
 
 ##### POST /v1/drives/`<sn>`/clean
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/607BBFFFF8/clean -b cookies.txt
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/607BBFFFF8/clean
 ```
 
 ##### PUT /v1/drives/`<location>` {"use": <"access" | "controlPath" | "verification">}
 ```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"access\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -d "{\"use\":\"access\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"controlPath\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4  -d "{\"use\":\"controlPath\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{\"use\":\"verification\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -d "{\"use\":\"verification\"}"
 ```
 
 ##### PUT /v1/drives/`<sn>` {"use": <"access" | "controlPath" | "verification">}
 ```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"access"\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -d "{"use":\"access"\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4-b cookies.txt -d "{"use":\"controlPath\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -d "{"use":\"controlPath\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -b cookies.txt -d "{"use":\"verification\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT  https://192.0.2.0/web/api/v1/drives/drive_F1C2R4 -d "{"use":\"verification\"}"
 ```
 
 ##### POST /v1/drives/<location>/reset {"mode": <"normal" | "hard">} 
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -d "{\"mode\":\"hard\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -d "{\"mode\":\"normal\"}"
 ```
 
 ##### POST /v1/drives/<sn>/reset {"mode": <"normal" | "hard">}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"hard\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -d "{\"mode\":\"hard\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -b cookies.txt -d "{\"mode\":\"normal\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2/reset -d "{\"mode\":\"normal\"}"
 ```
 
 ##### PUT /v1/drives/<sn> {"beacon": <"enabled" | "disabled">}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"disabled\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -d "{\"beacon\":\"disabled\"}"
 ```
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -b cookies.txt -d "{\"beacon\":\"enabled\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/drives/drive_F1C2R2 -d "{\"beacon\":\"enabled\"}"
 ```
 
 ### Ethernet ports
@@ -220,6 +289,10 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts/ethernetPort_F1Pa
 ```
+
+<! ##### PUT /v1/ethernetPorts/{location} {"ipv4Address": `<IPv4 address>`, "ipv4Subnet": `<IPv4 subnet mask>`, "ipv4Gateway": `<IPv4 gatway address>`, 
+"ipv4Assignment": `<"static"|"dynamic">`, "ipv4Primary": `<IPv4 address>`, "ipv4Secondary": `<IPv4 address>`}
+-->
 
 ### Events
 
@@ -263,6 +336,13 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/frames
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/frames/frame_F1
 ```
  
+### GUI settings
+
+##### GET /v1/guiSettings
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/guiSettings
+``` 
+
 ### I/O stations
 
 ##### GET /v1/ioStations
@@ -272,7 +352,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ioStations
 
 ##### GET /v1/iostations/`<location>`
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/iostations/ioStation__C3
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/iostations/ioStation_C3
 ```
 
  
@@ -285,22 +365,30 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library
 
 ##### POST /v1/library/reset
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library/reset -b cookies.txt
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library/reset 
 ```
 
 ##### PUT /v1/library
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library -d "{\"time\":\"2024-10-20T22:46:00\"}"
 ```
+PATCH /v1/library {"ntpMode": <"enabled|"disabled">, "primaryNtpAddress": <address>, "secondaryNtpAddress": <address>}
 
+PATCH/v1/library {"timezone":<time zone>}
+Manually sets the time zone of the library.
+
+PATCH /v1/library {"capacityUtilThresh": <value>}
+Modify the licensed capacity warning threshold.
+
+PATCH /v1/library {"location":<install location description>, "address": <install address>, "city": <install city>, "state": <install state>, "country": <install country>, "contact": <library admin>, "telephone": <library admin phone>, "secondaryTelephone": <library admin backup phone>}
 ###### PUT /v1/library/saveConfig 
 ```
-curl -k -b cookie.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig --output dbfile.dbz
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig --output dbfile.dbz
 ```
 
 ###### POST /v1/library/restoreConfig  
 ```
-curl -k -v -b cookie.txt -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/library/restoreConfig -F 'filename=@dbfile.dbz; type=application/octet-stream'
+curl -k -v -b cookies.txt -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/library/restoreConfig -F 'filename=@dbfile.dbz; type=application/octet-stream'
 ```
 
 ### Logs
@@ -334,7 +422,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/nodeCards/65
 
 ##### POST /v1/nodeCards/`<ID>`/reset
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/nodeCards/65/reset -b cookies.txt
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/nodeCards/65/reset
 ```
 
 ### Power supplies
@@ -367,6 +455,58 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/Back
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/LogicalLibrary1/voslerRanges
 ```
 
+##### POST /v1/logicalLibraries/'<name>`/volserRanges {"start": <starting VOLSER>, "end": <ending VOLSER>, "applyNow": <"yes"|"no">}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/LogLib_1/volserRanges -d "{\"start\": \"AAA000\", \"end\": \"BBB000\", \"applyNow\": \"yes\"}"
+```
+
+##### POST /v1/logicalLibraries/`<name>`/assignDataCartridges {"cartridges": [<VOLSER1|internalAddress1>, <VOLSER2|internalAddress2> ...]}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/LogLib_1/volserRanges -d "{\"cartridges\": [\"AAA001\", \"AAA002\"]}"
+```
+
+##### POST /v1/logicalLibraries/`<name>`/unassignDataCartridges {"cartridges": [<VOLSER1|internalAddress1>, <VOLSER2|internalAddress2> ...]}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/Lib1/unassignDataCartridges -d "{\"cartridges\": [\"AAA001\", \"AAA002\"]}"
+```
+
+##### POST /v1/logicalLibraries/`<name>`/assignDrives {"drives": [<locationOrSN|sn>, ...]}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/LogLib_3/assignDrives -d "{\"drives\": \"drive_F1C2R4\"}"
+```
+
+##### POST /v1/logicalLibraries/`<name>`/unassignDrives {"drives": [<locationOrSN|sn>, ...]}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/{name}/unassignDrives  -d "{\"drives\": \"1013000276\"}"
+```
+##### POST /v1/logicalLibraries/`<name>`/configureEncryption {"method": <encryption method>}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/{name}/configureEncryption -d "{\"method\": \"applicationManaged\"}"
+```
+##### POST /v1/logicalLibraries {"name": <LL name>, "drives": {<locationOrSN|sn>, ...], "mediaType": <LTO"|"3592">}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries -d "{\"name\": \"Library_A\", \"drives\": [{\"drive_F1C2R4\", \"1013000276\"], \"mediaType\": \"LTO\"}"
+```
+
+##### GET /v1/logicalLibraries
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries
+```
+
+##### GET /v1/logicalLibraries/`<name>`
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/Library_A 
+```
+
+##### GET /v1/logicalLibraries/`<name>`/voslerRanges
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/Library_A/volserRanges
+```
+
+##### PATCH /v1/logicalLibraries/`<name>` {"name": `<new name>`}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/logicalLibraries/Library_A
+```
 
 ### Reports
 
@@ -375,7 +515,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/logicalLibraries/Logi
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
 ```
 
-###### GET /v1/reports/accessors?after=<YYYY-MM-DDThh:mm:ss>&before=<YYYY-MM-DDThh:mm:ss
+###### GET /v1/reports/accessors?after=<YYYY-MM-DDThh:mm:ss>&before=<YYYY-MM-DDThh:mm:ss>
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
 ```
@@ -429,76 +569,54 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/tasks/82
 
 ##### POST /v1/tasks {"type": "inventoryTier0and1", "location": <"library" | "frame_F`<f>`">}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"inventoryTier0and1\", \"location\":\"library\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"inventoryTier0and1\", \"location\":\"library\"}"
 ```
 
 ##### POST /v1/tasks [{"type": "inventoryAllTiers", "location": <"library" | "frame_F`<f>`">}]
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"inventoryAllTiers\", \"location\":\"library\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"inventoryAllTiers\", \"location\":\"library\"}"
 ```
 
 ##### POST /v1/tasks {"type": "startDriveService", "location": "drive_F`<f>`C`<c>`R`<r>`"}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"startDriveService\", \"location\":\"drive_F1C3R5\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"startDriveService\", \"location\":\"drive_F1C3R5\"}"
 ```
 
 ##### POST /v1/tasks {"type": "completeDriveService", "location": "drive_F`<f>`C`<c>`R`<r>`"}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"completetDriveService\", \"location\":\"drive_F1C3R5\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"completetDriveService\", \"location\":\"drive_F1C3R5\"}"
 ```
 
 ##### POST /v1/tasks {"type": "calibrateLibrary", "accessor": "accessor_A`<a|b>`"}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateLibrary\", \"accessor\":\"accessor_Aa\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"calibrateLibrary\", \"accessor\":\"accessor_Aa\"}"
 ```
 
 ##### POST /v1/tasks {"type": "calibrateFrame", “location": "frame_F`<f>`", "accessor": "accessor_A`<a|b>`"}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateFrame\", \"location\":\"frame_F1\", \"accessor\": \"accessor_Aa\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"calibrateFrame\", \"location\":\"frame_F1\", \"accessor\": \"accessor_Aa\"}"
 ```
 
 ##### POST /v1/tasks {"type": "calibrateAccessor", "accessor": "accessor_A`<a|b>`"}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"calibrateAccessor\", \"accessor\":\"accessor_Aa\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"calibrateAccessor\", \"accessor\":\"accessor_Aa\"}"
 ```
 
 ##### POST /v1/tasks testDrive {"type": "testDrive", "location": "drive_F`<f>`C`<c>`R`<r>`"}
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -b cookies.txt -d "{\"type\":\"testDrive\", \"location\": \"drive_F1C5R3\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"testDrive\", \"location\": \"drive_F1C5R3\"}"
 ```
 
 ##### POST /v1/tasks testDrive {"type": "updateLibraryFirmware"}
 ```
-curl -k -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/tasks -b cookie.txt -F 'filename=@TS4500_11100-05G.afwz; type=application/octet-stream' -F '{"type": "updateLibraryFirmware"};type= application/json'
+curl -k -b cookies.txt -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/tasks -F 'filename=@TS4500_11100-05G.afwz; type=application/octet-stream' -F '{"type": "updateLibraryFirmware"};type= application/json'
 ```
 
 ##### POST /v1/tasks testDrive {"type": "updateDriveFirmware", "drive_F`<f>`C`<c>`R`<r>`"}
 ```
-curl -k -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/tasks -b cookie.txt -F 'filename=@D3I4_A0B.fcp_fj_D.fmrz; type=application/octet-stream' -F '{"type": "updateDriveFirmware", "location":"drive_F1C4R4"};type= application/json'
+curl -k -b cookies.txt -H "Content-Type: multipart/form-data" POST https://192.0.2.0/web/api/v1/tasks -F 'filename=@D3I4_A0B.fcp_fj_D.fmrz; type=application/octet-stream' -F '{"type": "updateDriveFirmware", "location":"drive_F1C4R4"};type= application/json'
 ```
 
-### Authentication
-
-##### GET /v1/authentication/passwordPolicy
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/passwordPolicy
-```
-
-##### GET /v1/authentication/sessions
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessions
-```
-
-##### GET /v1/authentication/sessions/`<name>`
-```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authentication/sessions/admin
-```
-
-
-##### POST /v1/authentication/sessions/`<name>`/disconnect
-```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/anotherusername/disconnect  -b cookies.txt -d "{\"reason\":\"`Need to use the library.`\"}"
-```
 
  
 ### Local user accounts
@@ -515,22 +633,22 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authenticatiion/userA
 
 ##### POST /v1/authentication/userAccounts
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -b cookies.txt -d "{\"name\":\"<name>\", \"role\":\"Administrator\", \"email\":\"username@example.com\", \"password\":\"mypassword\", \"expirePassword\": "no"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -d "{\"name\":\"<name>\", \"role\":\"Administrator\", \"email\":\"username@example.com\", \"password\":\"mypassword\", \"expirePassword\": "no"}"
 ```
 
 ##### PUT /v1/authentication/userAccounts/`<name>` 
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/myUsername i -b cookies.txt -d "{\"role\":\"Administrator\", \"email\":\"myusername@example.com\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/myUsername -d "{\"role\":\"Administrator\", \"email\":\"myusername@example.com\"}"
 ```
 
 ##### POST /v1/authentication/userAccounts/`<name>`/unlock
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/myusername/unlock -b cookies.txt -d
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/myusername/unlock
 ```
 
 ##### POST /v1/authentication/userAccounts/`<name>`/setPassword
 ```
-curl -k -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/admin/setPassword -b cookies.txt -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/admin/setPassword -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
 ```
 
 ### Roles
@@ -557,13 +675,53 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/s
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.11
 ```
 
- 
-### GUI settings
+##### POST /v1/notification/syslog/servers {"address": <address>, "port": <port>, "subscribed": ["error"|"warning"|"information", ...]}
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
 
-##### GET /v1/guiSettings
+GET /v1/notification/syslog/servers
+Returns the list of Syslog servers that are registered with the library to receive Syslog notifications and their current settings.
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/guiSettings
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
 ```
+
+GET /v1/notification/syslog/servers/{ipAddress}
+Returns the list of Syslog servers for a specified IP address or host name.
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{ipAddress} -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
+
+PATCH /v1/notification/syslog/servers/{address} {"address": <address>, "port": <port>}Modifies the address or port of the syslog server. This is used if there are network changes that cause these addresses to change or to fix incorrect configurations.
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{address} -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
+
+PATCH /v1/notification/syslog/servers/{address} {"subscribed": ["information" | "warning" | "error", ...]}Modifies the severity of notifications the syslog server is subscribed to receive. All notifications of the selected verities will be returned.
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/{address} -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
+
+Work items
+Work items represent cartridge move requests within the library. They are stored in the library in a work item queue that the library uses to prioritize moves in the most efficient manner.
+
+POST /v1/workItems {"type": "moveToSlot", "cartridge": <volser>,"sourceInternalAddress": <internalAddress>,"destinationLocation": <location>}
+Moves a cartridge to a slot chosen by the library.
+```
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/workItems
+```
+
+POST /v1/workItems [{"type": "moveToDrive", "cartridge": <volser>,"sourceInternalAddress": <internalAddress>, "destinationLocation": <location>, "destinationSN": < serialNumber >}]
+Moves a cartridge to the specified drive.
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
+
+POST /v1/workItems [{"type": "moveToIOStation", "cartridge": <volser>, "sourceInternalAddress": <internalAddress>, "destinationLocation": <location>}]
+```
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/workItems -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+```
+
 
 
 
