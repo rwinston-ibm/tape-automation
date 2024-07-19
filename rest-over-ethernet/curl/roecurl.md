@@ -96,7 +96,7 @@ curl -k -b cookies.txt -X POST https://192.0.2.0/web/api/v1/authentication/passw
 
 ##### POST /v1/authentication/sessions/`<name>`/disconnect
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/anotherusername/disconnect -d "{\"reason\":\"`Need to use the library.`\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/anotherusername/disconnect -d "{\"reason\":\"Need to use the library.\"}"
 ```
 
 ##### PUT /v1/authentication/sessionPolicy {"autoLogout": `<minutes|null>`, "autoIMCLogin": `<enabled"|"disabled">`}
@@ -109,7 +109,7 @@ curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.
 
 ##### POST /v1/authentication/userAccounts
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -d "{\"name\":\"<name>\", \"role\":\"Administrator\", \"email\":\"username@example.com\", \"password\":\"mypassword\", \"expirePassword\": "no"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -d "{\"name\":\"<name>\", \"role\":\"Administrator\", \"email\":\"username@example.com\", \"password\":\"mypassword\", \"expirePassword\": \"no\"}"
 ```
 
 ##### PUT /v1/authentication/userAccounts/`<name>` 
@@ -124,7 +124,7 @@ curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0
 
 ##### POST /v1/authentication/userAccounts/`<name>`/setPassword
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/admin/setPassword -d "{\"password\":\"mypassword\", \"expirePassword\": "yes"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/admin/setPassword -d "{\"password\":\"mypassword\", \"expirePassword\": \"yes\"}"
 ```
 
 ### Accessors (TS4500 only)
@@ -326,7 +326,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/ethernetPorts/etherne
 ##### PUT /v1/ethernetPorts/{location} {"ipv4Address": `<IPv4 address>`, "ipv4Subnet": `<IPv4 subnet mask>`, "ipv4Gateway": `<IPv4 gatway address>`, "ipv4Assignment": `<"static"|"dynamic">`, "ipv4Primary": `<IPv4 address>`, "ipv4Secondary": `<IPv4 address>`}
 
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/ethernetPorts/ethernetPort_F1Pa -d "{"ipv4Assignment": "static", ipv4Address": "192.0.2.2", "ipv4Subnet": "255.255.252.0", "ipv4Gateway": "192.0.2.24"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.2.0/web/api/v1/ethernetPorts/ethernetPort_F1Pa -d "{\"ipv4Assignment\": \"static\", \"ipv4Address\": \"192.0.2.2\", \"ipv4Subnet\": \"255.255.252.0\", \"ipv4Gateway\": \"192.0.2.24\"}"
 ```
 
 ### Events
@@ -410,22 +410,22 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library -d "{\"time\"
 
 ##### PATCH /v1/library {"ntpMode": `<"enabled|"disabled">`, "primaryNtpAddress": `<address>`, "secondaryNtpAddress": `<address>`}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{"ntpMode": "enabled">, "primaryNtpAddress": "192.0.2.1", "secondaryNtpAddress": "192.0.2.1"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"ntpMode\": \"enabled\", \"primaryNtpAddress\": \"192.0.2.1\", \"secondaryNtpAddress\": \"192.0.2.1\"}"
 ```
 
 ##### PATCH /v1/library {"timezone": `<time zone>`}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{"timezone":"America/Phoenix"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"timezone\":\"America/Phoenix\"}"
 ```
 
 ##### PATCH /v1/library {"capacityUtilThresh": `<value>`}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{"capacityUtilThresh": 90.9}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"capacityUtilThresh\": 90.9}"
 ```
 
 ##### PATCH /v1/library {"location": `<install location description>`, "address": `<install address>`, "city": `<install city>`, "state": `<install state>`, "country": `<install country>`, "contact": `<library admin>`, "telephone": `<library admin phone>`, "secondaryTelephone": `<library admin backup phone>`}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"location\": \"Storage Lab\", \"address\": \"0 Main St\", \"city\": \"Phoenix\", \"state\": \"AZ\", \"country\": \"US\", \"contact\": \"J Doe\"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"location\": \"Storage Lab\", \"address\": \"0 Main St\", \"city\": \"Phoenix\", \"state\": \"AZ\", \"country\": \"US\", \"contact\": \"J%20Doe\"}"
 ```
 
 ###### PUT /v1/library/saveConfig 
@@ -564,7 +564,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
 
 ###### GET /v1/reports/accessors?after=`<YYYY-MM-DDThh:mm:ss>`&before=`<YYYY-MM-DDThh:mm:ss>`
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/accessors%3Fafter=2024-06-12T10:00:00%26before=2024-06-12T12:00:00:00
 ```
 
 ###### GET /v1/reports/drives
@@ -574,7 +574,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives
 
 ###### GET /v1/reports/drives?after=`<YYYY-MM-DDThh:mm:ss>`&before=`<YYYY-MM-DDThh:mm:ss>`
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/drives%3Fafter=2024-06-12T10:00:00%26before=2024-06-12T12:00:00:00
 ```
 
 ###### GET /v1/reports/library
@@ -584,7 +584,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
 
 ###### GET /v1/reports/library?after=`<YYYY-MM-DDThh:mm:ss>`&before=`<YYYY-MM-DDThh:mm:ss>`
 ```
-curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library
+curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/reports/library%3Fafter=2024-06-12T10:00:00%26before=2024-06-12T12:00:00:00
 ```
 
  
@@ -693,7 +693,7 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/s
 
 ##### POST /v1/notification/syslog/servers {"address": `<address>`, "port": `<port>`, "subscribed": ["error"|"warning"|"information", ...]}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d " {"address": <address>, "port": <port>, "subscribed": ["error"|"warning"|"information", ...]}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers -d "{\"address\": \"192.0.2.11\", \"port\": \"514\", \"subscribed\": \"error\"}"
 ```
 
 ##### GET /v1/notification/syslog/servers
@@ -708,12 +708,12 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/notification/syslog/s
 
 ##### PUT /v1/notification/syslog/servers/`<address>` {"address": `<address>`, "port": <port>}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.9 -d "{"address": "192.0.2.10", "port": "514"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.9 -d "{\"address\": \"192.0.2.10\", \"port\": \"514\"}"
 ```
 
 ##### PUT /v1/notification/syslog/servers/`<address>` {"subscribed": ["information" | "warning" | "error", ...]}
 ```
-curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.10 -d "{"subscribed": "information"}"
+curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/notification/syslog/servers/192.0.2.10 -d "{\"subscribed\": \"information\"}"
 ```
 
 ### Work items
