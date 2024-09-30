@@ -94,10 +94,12 @@ curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/authenticatiion/userA
 curl -k -b cookies.txt -X POST https://192.0.2.0/web/api/v1/authentication/passwordPolicy/factoryReset
 ```
 
+<!-- future
 ##### POST /v1/authentication/sessions/`<name>`/disconnect
 ```
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/sessions/anotherusername/disconnect -d "{\"reason\":\"Need to use the library.\"}"
 ```
+-->
 
 ##### PUT /v1/authentication/sessionPolicy {"autoLogout": `<minutes|null>`, "autoIMCLogin": `<enabled"|"disabled">`}
 ```
@@ -112,15 +114,16 @@ curl -k -b cookies.txt -H "Content-Type: application/json" -X PUT https://192.0.
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts -d "{\"name\":\"<name>\", \"role\":\"Administrator\", \"email\":\"username@example.com\", \"password\":\"mypassword\", \"expirePassword\": \"no\"}"
 ```
 
+<!-- future
 ##### PUT /v1/authentication/userAccounts/`<name>` 
 ```
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/ap/v1/authentication/userAccounts/myUsername -d "{\"role\":\"Administrator\", \"email\":\"myusername@example.com\"}"
 ```
-
 ##### POST /v1/authentication/userAccounts/`<name>`/unlock
 ```
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/authentication/userAccounts/myusername/unlock
 ```
+-->
 
 ##### POST /v1/authentication/userAccounts/`<name>`/setPassword
 ```
@@ -428,7 +431,7 @@ curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/library -d "{\"location\": \"Storage Lab\", \"address\": \"0 Main St\", \"city\": \"Phoenix\", \"state\": \"AZ\", \"country\": \"US\", \"contact\": \"J%20Doe\"}"
 ```
 
-###### PUT /v1/library/saveConfig 
+###### GET /v1/library/saveConfig 
 ```
 curl -k -b cookies.txt -X GET https://192.0.2.0/web/api/v1/library/saveConfig --output dbfile.dbz
 ```
@@ -634,17 +637,17 @@ curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"completetDriveService\", \"location\":\"drive_F1C3R5\"}"
 ```
 
-##### POST /v1/tasks {"type": "calibrateLibrary", "accessor": "accessor_A`<a|b>`"}
+##### POST /v1/tasks {"type": "calibrateLibrary", "accessor": "accessor_A`<a|b>`"} 
 ```
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"calibrateLibrary\", \"accessor\":\"accessor_Aa\"}"
 ```
 
-##### POST /v1/tasks {"type": "calibrateFrame", "location": "frame_F`<f>`", "accessor": "accessor_A`<a|b>`"}
+##### POST /v1/tasks {"type": "calibrateFrame", "location": "frame_F`<f>`", "accessor": "accessor_A`<a|b>`"} (TS4500 only)
 ```
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"calibrateFrame\", \"location\":\"frame_F1\", \"accessor\": \"accessor_Aa\"}"
 ```
 
-##### POST /v1/tasks {"type": "calibrateAccessor", "accessor": "accessor_A`<a|b>`"}
+##### POST /v1/tasks {"type": "calibrateAccessor", "accessor": "accessor_A`<a|b>`"} (TS4500 only)
 ```
 curl -k -b cookies.txt -H "Content-Type: application/json" -X POST https://192.0.2.0/web/api/v1/tasks -d "{\"type\":\"calibrateAccessor\", \"accessor\":\"accessor_Aa\"}"
 ```
